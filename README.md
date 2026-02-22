@@ -1,2 +1,1 @@
 # Pixel-Life-Simulator
-Idk
