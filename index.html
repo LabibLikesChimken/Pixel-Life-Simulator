@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#3cb043">
+<title>Pixel Game</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Main Menu -->
+<div class="main-menu" id="mainMenu">
+  <img src="assets/ui/bg1.png" alt="Menu Background" class="menu-bg">
+  <div class="menu-options">
+    <button id="playBtn">Play</button>
+    <button id="settingsBtn">Settings</button>
+    <button id="aboutBtn">About</button>
+  </div>
+</div>
+
+<!-- Game Canvas -->
+<canvas id="game"></canvas>
+
+<!-- UI overlay (inventory, joystick, action) -->
+<div class="ui-overlay">
+  <div class="inventory">
+    <div class="inventory-slot"></div>
+    <div class="inventory-slot"></div>
+    <div class="inventory-slot"></div>
+    <div class="inventory-slot"></div>
+    <div class="inventory-slot"></div>
+  </div>
+
+  <div class="joystick" id="joystick">
+    <div id="stick"></div>
+  </div>
+
+  <div id="actionBtn"></div>
+</div>
+
+<!-- App logic -->
+<script src="app.js"></script>
+
+<script>
+  // PWA Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(()=>console.log('SW registered'));
+  }
+
+  // Lock landscape orientation
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(err => console.log('Cannot lock orientation:', err));
+  }
+
+  // Menu button logic
+  const mainMenu = document.getElementById("mainMenu");
+  const playBtn = document.getElementById("playBtn");
+  const settingsBtn = document.getElementById("settingsBtn");
+  const aboutBtn = document.getElementById("aboutBtn");
+
+  playBtn.addEventListener("click", () => {
+    mainMenu.style.display = "none";
+    // Game already running in app.js
+  });
+
+  settingsBtn.addEventListener("click", () => {
+    alert("Settings tab clicked!");
+  });
+
+  aboutBtn.addEventListener("click", () => {
+    alert("About tab clicked!");
+  });
+</script>
+
+</body>
+</html>
